@@ -1,0 +1,22 @@
+{
+  "name": "portfolio-react",
+  "version": "0.1.0",
+  "private": true,
+  "main": "Server.js",
+  "scripts": {
+    "start": "nodemon src/Server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  },
+  "jshintConfig": {
+    "esversion": 8,
+    "strict": "implied",
+    "devel": true,
+    "node": true,
+    "globals": {}
+  }
+}
