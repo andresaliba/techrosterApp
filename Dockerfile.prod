@@ -1,7 +1,7 @@
 # Production Build
 # Stage 1: Build react client on container
 # copies over client side project folder, installs dependencies, and runs command to build the production build
-FROM node:10.16-alpine as client
+FROM node:14.15.3-alpine as client
 WORKDIR /usr/app/client-tempy/
 COPY client/package*.json .
 RUN npm install
@@ -20,7 +20,7 @@ RUN yarn build
 # copies over client side production build to /usr/src/client/build
 # copies over server side project folder to /usr/src/server and installs dependencies, etc.
 # final steps is to fire up the express server via "npm run start"
-FROM node:10.16-alpine as server
+FROM node:14.15.3-alpine as server
 WORKDIR /usr/src/app/
 COPY --from=client /usr/app/client-tempy/build/ ./client/build/
 WORKDIR /usr/src/app/server/
