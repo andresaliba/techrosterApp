@@ -1,5 +1,5 @@
 # pull basic node image from docker hub
-FROM node:10.16-alpine
+FROM node:14.15.3-alpine
 # Working directory for rest of commands
 WORKDIR /usr/app
 COPY package*.json ./
