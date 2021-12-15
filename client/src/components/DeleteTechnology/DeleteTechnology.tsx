@@ -32,14 +32,15 @@ const DeleteTechnology = ({ technologies }: ComponentProps) => {
     }
     
     const onError = () => {
-        console.log("Error occured while removing a new Technology");
+        console.log("Error occured while removing the Technology");
     }
     
-    // ---------------------------------- render to the DOM
+    // ---------------------------------------------- render to the DOM
     return(
         // used ternary operator to not have the "?"
         (currentTechnology !== undefined) ?
         <div className="row">
+
             <div>
                 <div className="paragraph">
                     <p>Are you sure you want to delete the following technology?</p>
@@ -52,8 +53,9 @@ const DeleteTechnology = ({ technologies }: ComponentProps) => {
             </div>
         </div>
         :
+        
         <div>
-            Error:(
+            <p>Error: Tecnology not found</p>
         </div>
     );
 }
