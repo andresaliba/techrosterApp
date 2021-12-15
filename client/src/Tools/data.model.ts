@@ -22,6 +22,7 @@ export interface Course {
 export interface ComponentProps {
     technologies:Technology[];
     courses:Course[];
+    setLoading:Function;
 }
 
 export interface LoadingProps {

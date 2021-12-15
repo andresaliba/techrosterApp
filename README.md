@@ -1,6 +1,8 @@
-# Boilerplate for PROG3017 Full Stack Programming with Express Server and MongoDB
+# Project 3 - Full Stack Web Development - React - MERN STACK
 
-This project folder contains the React client side and the Express Server side with MondoDB
+This project folder contains the React client side and the Express Server side with MongoDB
+
+Developed as a final project for the program Full Stack Web Development at Nova Scotia Community College
 
 ## Available Scripts
 

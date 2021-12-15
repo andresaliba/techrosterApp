@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Routes, Switch, useHistory, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { getJSONData } from "./Tools/Toolkit";
 import { JSONData, Technology, Course } from "./Tools/data.model";
 import Error from "./components/Error/Error";
@@ -48,14 +48,12 @@ function App() {
       </div>
 
       {(technologies.length > 0 && courses.length > 0) ?
-          <Switch>
-            <Route path="/">
-              <Roster technologies={technologies} courses={courses} setLoading={loading} />
-            </Route>
+          <Routes>
+            <Route  path="/" element = { <Roster technologies={technologies} courses={courses} setLoading={setLoading} /> } />
 
-            <Route>
-              <Error/>
-            </Route>
+            // <Route>
+            //   <Error/>
+            // </Route>
 
             {/* <Route path="/list"
               element={ <List technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
@@ -78,7 +76,7 @@ function App() {
             <Route path="/tech/edit/:id"
               element={ <EditTech technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
               /> */}
-        </Switch>
+        </Routes>
       :
         <div className="error">There are currently no technologies and courses in the database :(</div>}
 
