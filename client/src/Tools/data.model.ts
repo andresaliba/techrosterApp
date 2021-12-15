@@ -2,6 +2,7 @@
 
 export interface JSONData {
     technologies: Technology[];
+    courses:Course[];
 }
 
 export interface Technology {
@@ -13,10 +14,18 @@ export interface Technology {
 }
 
 export interface Course {
+    _id : string;
     code: string;
     name: string;
 }
 
 export interface ComponentProps {
     technologies:Technology[];
+    courses:Course[];
+}
+
+export interface LoadingProps {
+    spinnerColor:string;
+    bgColor:string
+    enabled:boolean; 
 }
