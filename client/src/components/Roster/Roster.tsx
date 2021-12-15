@@ -1,12 +1,12 @@
-import React from 'react';
-import './List.scss';
+import React from "react";
+import "./List.scss";
 import { ComponentProps, Technology, Course } from "../../Tools/data.model";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
-const List = ( { technologies, courses }:ComponentProps ) => {
+const Roster = ({ technologies, courses }: ComponentProps) => {
     return(
         <div className="row">
             <div>
@@ -40,4 +40,4 @@ const List = ( { technologies, courses }:ComponentProps ) => {
     );
 }
 
-export default List;
+export default Roster;
