@@ -7,6 +7,7 @@ import Error from "./components/Error/Error";
 import LoadingOverlay from "./components/LoadingOverlay/LoadingOverlay";
 import Roster from "./components/Roster/Roster";
 import AddTechnology from './components/AddTechnology/AddTechnology';
+import DeleteTechnology from './components/DeleteTechnology/DeleteTechnology';
 
 const RETRIEVE_SCRIPT:string = "http://localhost:8080/get";
 
@@ -50,16 +51,12 @@ function App() {
 
       {(technologies.length > 0 && courses.length > 0) ?
           <Routes>
-            <Route  path="/" 
-            element = { <Roster technologies={technologies} courses={courses} setLoading={setLoading} /> } />
-
-            <Route  path="" 
-            element = { <Error /> } />
-
-            <Route  path="/technology/add" 
-            element = { <AddTechnology technologies={technologies} courses={courses} setLoading={setLoading} /> } />
-
-            
+            <Route  path="/">
+              <Route index element={<Roster technologies={technologies} courses={courses} setLoading={setLoading} /> } />
+              <Route path="*" element={<Error />} /> 
+              <Route  path="technology/add" element={<AddTechnology technologies={technologies} courses={courses} setLoading={setLoading} /> } />
+              <Route  path="technology/delete/:id" element={<DeleteTechnology technologies={technologies} courses={courses} setLoading={setLoading} /> } />
+            </Route>
 
             {/* <Route path="/list"
               element={ <List technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }

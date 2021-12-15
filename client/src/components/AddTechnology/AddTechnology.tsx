@@ -14,7 +14,7 @@ const AddTechnology = ({ technologies,courses, setLoading }: ComponentProps) => 
     // set technology    
     let currentTechnology:(Technology | undefined) = technologies.find(item => item._id === id);
     // isolate the id route parameter
-    let { id } = useParams<string>();
+    let { id } = useParams();
 
     const [description, setDescription] = React.useState<string>("");
     const [technology, setTechnology] = React.useState<string>("");
@@ -31,12 +31,12 @@ const AddTechnology = ({ technologies,courses, setLoading }: ComponentProps) => 
             "difficulty": difficulty,
             "courses": courseArray
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError);
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "create");
     }
 
     const onSuccess = () => {
         const navigate = useNavigate();
-        navigate('/');
+        <Link to="/"></Link>
         // fetchData();
     }
 

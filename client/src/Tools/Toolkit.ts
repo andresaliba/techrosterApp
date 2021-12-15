@@ -44,7 +44,7 @@ function getXMLData(retrieveScript:string, success:Function, failure:Function):v
     xmlhttp.send();
 }
 
-function sendJSONData(sendScript:string, jsonString:string, success:Function, failure:Function):void {
+function sendJSONData(sendScript:string, jsonString:string, success:Function, failure:Function, param:string):void {
     // send out AJAX request
     let xmlhttp:XMLHttpRequest = new XMLHttpRequest();
     xmlhttp.addEventListener("load", (e:Event) => {
@@ -59,7 +59,9 @@ function sendJSONData(sendScript:string, jsonString:string, success:Function, fa
     xmlhttp.addEventListener("error", (e:Event) => {
         failure();
     });
-    xmlhttp.open("POST", sendScript, true);
+    if (param == "create") { xmlhttp.open("POST", sendScript, true);}
+    if (param == "update") { xmlhttp.open("PUT", sendScript, true);}
+    if (param == "delete") { xmlhttp.open("DELETE", sendScript, true);}
     // setting the content-type of the request so the server knows what format that data is coming as
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(jsonString);
