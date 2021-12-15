@@ -2,22 +2,7 @@
 
 .buttons__bottom {
     padding-top: 15px;
-}
-
-.paragraph {
-    padding-top: 15px;
-    font-size:18px;
-    color:#616161;
-}
-
-.form-control-lg {
-    border-radius: 8px;
-    border: none;
-    height: 50px;
-    font-size: 18px;
-    padding-left: 20px;
-    background-color: #e6e6e6;
-
+    
 }
 
 .btn__style {
@@ -45,13 +30,17 @@
     font-size: 16px;
 }
 
-textarea {
+.form-control-lg {
     border-radius: 8px;
     border: none;
     height: 50px;
     font-size: 18px;
-    padding-top: 20px;
     padding-left: 20px;
     background-color: #e6e6e6;
+}
 
+.paragraph {
+    padding-top: 15px;
+    font-size:18px;
+    color:#616161;
 }

@@ -21,7 +21,7 @@ const EditTechnology = ({ technologies, courses, setLoading }: ComponentProps) =
     const [courseArray, setCourseArray] = React.useState<Course[] | undefined>(currentTechnology?.courses);
 
     // ---------------------------------------------- event handlers
-    const OkButton = () => {
+    const EditTech = () => {
         let json = {
             "_id": currentTechnology?._id,
             "name": techName,
@@ -29,12 +29,11 @@ const EditTechnology = ({ technologies, courses, setLoading }: ComponentProps) =
             "difficulty": techDifficulty,
             "courses": courseArray
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "PUT");
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "update");
     }
 
     const onSuccess = () => {
         <Link to="/"></Link>
-        // fetchData();
     }
 
     const onError = () => {
@@ -123,7 +122,7 @@ const EditTechnology = ({ technologies, courses, setLoading }: ComponentProps) =
                 </div>
 
                 <div className="buttons__bottom">
-                    <button type="button" className="btn__style" disabled={techName?.trim() === "" || techDescription?.trim() === "" ? true : false} onClick={OkButton}>Ok</button>&nbsp;
+                    <button type="button" className="btn__style" disabled={techName?.trim() === "" || techDescription?.trim() === "" ? true : false} onClick={EditTech}>Ok</button>&nbsp;
                     <Link to="/"><button className="btn__style">Cancel</button></Link>
                 </div>
 
