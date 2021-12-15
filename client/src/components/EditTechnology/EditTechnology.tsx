@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import './EditTechnology.scss';
 import { ComponentProps, Technology, Course} from "../../Tools/data.model";

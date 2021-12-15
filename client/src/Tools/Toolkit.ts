@@ -59,9 +59,9 @@ function sendJSONData(sendScript:string, jsonString:string, success:Function, fa
     xmlhttp.addEventListener("error", (e:Event) => {
         failure();
     });
-    if (param == "create") { xmlhttp.open("POST", sendScript, true);}
-    if (param == "update") { xmlhttp.open("PUT", sendScript, true);}
-    if (param == "delete") { xmlhttp.open("DELETE", sendScript, true);}
+    if (param === "create") { xmlhttp.open("POST", sendScript, true);}
+    if (param === "update") { xmlhttp.open("PUT", sendScript, true);}
+    if (param === "delete") { xmlhttp.open("DELETE", sendScript, true);}
     // setting the content-type of the request so the server knows what format that data is coming as
     xmlhttp.setRequestHeader("Content-Type", "application/json");
     xmlhttp.send(jsonString);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import './DeleteTechnology.scss';
 import { ComponentProps, Technology } from "../../Tools/data.model";
@@ -53,7 +53,7 @@ const DeleteTechnology = ({ technologies }: ComponentProps) => {
             </div>
         </div>
         :
-        
+
         <div>
             <p>Error: Tecnology not found</p>
         </div>

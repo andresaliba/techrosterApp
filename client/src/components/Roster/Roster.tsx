@@ -1,5 +1,5 @@
 import React from "react";
-import "./List.scss";
+import "./Roster.scss";
 import { ComponentProps, Technology, Course } from "../../Tools/data.model";
 import { Link } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";

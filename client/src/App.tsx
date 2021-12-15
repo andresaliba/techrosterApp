@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import { Route, Routes } from "react-router-dom";
 import { getJSONData } from "./Tools/Toolkit";
 import { JSONData, Technology, Course } from "./Tools/data.model";
@@ -14,7 +14,7 @@ import EditCourse from './components/EditCourse/EditCourse';
 import DeleteCourse from './components/DeleteCourse/DeleteCourse';
 
 const RETRIEVE_SCRIPT:string = "http://localhost:8080/get";
-
+ 
 function App() {
 
   // ---------------------------------------------- event handlers
