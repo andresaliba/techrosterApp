@@ -32,7 +32,8 @@ app.get("/get", async (request, response) => {
         // get reference to database via name
         let db = mongoClient.db(DB_NAME);
         let techArray = await db.collection("technologies").find().sort("name",1).toArray();
-        let json = { "technologies": techArray };
+        let coursesArray = await db.collection("courses").find().sort("name",1).toArray();
+        let json = { "technologies": techArray, "courses":coursesArray };
         // serializes sampleJSON to string format
         response.status(200);
         response.send(json);
