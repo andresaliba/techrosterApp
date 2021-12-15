@@ -8,7 +8,7 @@ import { ComponentProps, Course } from "../../Tools/data.model";
 const DeleteCourse = ({ courses }: ComponentProps) => {
 
     // --------------------------------------------- state setup
-    const SUBMIT_SCRIPT:string = "http://localhost:8080/delete/course";
+    const SUBMIT_SCRIPT:string = "/delete/course";
 
     // isolate the id route parameter
     let { id } = useParams();

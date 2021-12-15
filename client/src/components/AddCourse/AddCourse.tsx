@@ -9,7 +9,7 @@ import { ComponentProps } from "../../Tools/data.model";
 const AddCourse = ({ setLoading }: ComponentProps) => {
 
     // --------------------------------------------- state setup
-    const SUBMIT_SCRIPT = "http://localhost:8080/post/course"
+    const SUBMIT_SCRIPT = "/post/course"
 
     const [courseName, setCourseName] = React.useState<string>("");
     const [code, setCode] = React.useState<string>("");

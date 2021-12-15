@@ -8,7 +8,7 @@ import { ComponentProps, Course } from "../../Tools/data.model";
 const EditCourse = ({courses, setLoading }: ComponentProps) => {
 
      // --------------------------------------------- state setup
-    const SUBMIT_SCRIPT:string = "http://localhost:8080/post/edit/course";
+    const SUBMIT_SCRIPT:string = "/post/edit/course";
 
     // isolate the id route parameter
     let { id } = useParams();

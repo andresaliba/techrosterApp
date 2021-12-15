@@ -9,7 +9,7 @@ import { ComponentProps, Technology } from "../../Tools/data.model";
 const DeleteTechnology = ({ technologies }: ComponentProps) => {
 
     // --------------------------------------------- state setup
-    const SUBMIT_SCRIPT:string = "http://localhost:8080/delete/technology";
+    const SUBMIT_SCRIPT:string = "/delete/technology";
     
     // isolate the id route parameter
     let { id } = useParams();

@@ -13,7 +13,7 @@ import AddCourse from './components/AddCourse/AddCourse';
 import EditCourse from './components/EditCourse/EditCourse';
 import DeleteCourse from './components/DeleteCourse/DeleteCourse';
 
-const RETRIEVE_SCRIPT:string = "http://localhost:8080/get";
+const RETRIEVE_SCRIPT:string = "/get";
  
 function App() {
 

@@ -9,7 +9,7 @@ import { FaTrash } from "react-icons/fa";
 import LoadingOverlay from "../LoadingOverlay/LoadingOverlay";
 
 const Roster = ({ technologies, courses }: ComponentProps) => {
-    const RETRIEVE_SCRIPT:string = "http://localhost:8080/get";
+    const RETRIEVE_SCRIPT:string = "/get";
     const [loading, setLoading] = React.useState<boolean>(true); 
     React.useEffect(() => {
         setLoading(true);

@@ -9,7 +9,7 @@ import { Technology, Course, ComponentProps } from "../../Tools/data.model";
 const AddTechnology = ({ technologies, courses, setLoading }: ComponentProps) => {
     
     // --------------------------------------------- state setup
-    const SUBMIT_SCRIPT = "http://localhost:8080/post/technology"
+    const SUBMIT_SCRIPT = "/post/technology"
 
     // isolate the id route parameter
     let { id } = useParams();
