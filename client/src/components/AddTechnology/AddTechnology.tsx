@@ -1,20 +1,20 @@
 import React from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
-import "./AddTech.scss";
+import "./AddTechnology.scss";
 import { Technology, Course, ComponentProps } from "../../Tools/data.model";
 
 
 // const AddTech = ({technologies,courses, fetchData, setLoading}: ComponentProps) => {
-const AddTechnology = ({ technologies,courses, setLoading }: ComponentProps) => {
+const AddTechnology = ({ technologies, courses, setLoading }: ComponentProps) => {
     
     // --------------------------------------------- state setup
     const SUBMIT_SCRIPT = "http://localhost:8080/post/technology"
 
-    // set technology    
-    let currentTechnology:(Technology | undefined) = technologies.find(item => item._id === id);
     // isolate the id route parameter
     let { id } = useParams();
+    // set technology    
+    let currentTechnology:(Technology | undefined) = technologies.find(item => item._id === id);
 
     const [description, setDescription] = React.useState<string>("");
     const [technology, setTechnology] = React.useState<string>("");
@@ -35,7 +35,7 @@ const AddTechnology = ({ technologies,courses, setLoading }: ComponentProps) => 
     }
 
     const onSuccess = () => {
-        const navigate = useNavigate();
+        // const navigate = useNavigate();
         <Link to="/"></Link>
         // fetchData();
     }
