@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import './DeleteTechnology.scss';
 import { ComponentProps, Technology } from "../../Tools/data.model";
@@ -22,13 +22,12 @@ const DeleteTechnology = ({ technologies }: ComponentProps) => {
         let json = {
             "_id": currentTechnology?._id,
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "delete");
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, 3);
     }
 
+    const navigate = useNavigate();
     const onSuccess = () => {
-        // const navigate = useNavigate();
-        <Link to="/"></Link>
-        // fetchData();
+        navigate("/");
     }
     
     const onError = () => {
@@ -42,7 +41,7 @@ const DeleteTechnology = ({ technologies }: ComponentProps) => {
         <div className="row">
 
             <div>
-                <div className="paragraph">
+                <div className="content__content">
                     <p>Are you sure you want to delete the following technology?</p>
                     {currentTechnology.name}
                 </div>

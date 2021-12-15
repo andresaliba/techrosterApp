@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import "./AddTechnology.scss";
 import { Technology, Course, ComponentProps } from "../../Tools/data.model";
@@ -31,13 +31,12 @@ const AddTechnology = ({ technologies, courses, setLoading }: ComponentProps) =>
             "difficulty": difficulty,
             "courses": courseArray
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "create");
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, 1);
     }
 
+    const navigate = useNavigate();
     const onSuccess = () => {
-        // const navigate = useNavigate();
-        <Link to="/"></Link>
-        // fetchData();
+        navigate("/");
     }
 
     const onError = () => {
@@ -87,19 +86,19 @@ const AddTechnology = ({ technologies, courses, setLoading }: ComponentProps) =>
                 <div className="content__caption">Add New Technology:</div>
 
                 <div>
-                    <p className="paragraph">Name:</p>
+                    <p className="content__content">Name:</p>
                     <input type="text" maxLength={50} value={technology} onChange={getTech} className="form-control-lg" />
-                    <p className="paragraph">Description:</p>
+                    <p className="content__content">Description:</p>
                     <textarea className="form-control" maxLength={500} value={description} onChange={getDescription} style={{width:450, height:150}}></textarea>
                 </div>
 
-                <p className="paragraph">Difficulty</p>
+                <p className="content__content">Difficulty</p>
 
                 <select className="btn__style" onChange={getDifficulty}>
                     {dropdown()}
                 </select>
                 
-                <div className="paragraph">
+                <div className="content__content">
 
                     {(courses.length > 0) ?
                         <p>Used in courses</p>

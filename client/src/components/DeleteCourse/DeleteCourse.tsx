@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams} from "react-router-dom";
+import { Link, useParams, useNavigate} from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import './DeleteCourse.scss';
 import { ComponentProps, Course } from "../../Tools/data.model";
@@ -20,16 +20,18 @@ const DeleteCourse = ({ courses }: ComponentProps) => {
         let json = {
             "_id": course?._id
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "delete");
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, 3);
+    }
+    
+    const navigate = useNavigate();
+    const onSuccess = () => {
+        navigate("/");
     }
 
     const onError = () => {
         console.log("Error occured while removing the course");
     }
 
-    const onSuccess = () => {
-        <Link to="/"></Link>
-    }
     // ----------------------------------------------  render to the DOM
     return(
         (course !== undefined) ?
@@ -37,7 +39,7 @@ const DeleteCourse = ({ courses }: ComponentProps) => {
         <div className="row">
 
             <div>
-                <div className="paragraph">
+                <div className="content__content">
                     <p>Are you sure you want to delete the {course.code} {course.name} course?</p>
                     
                 </div>

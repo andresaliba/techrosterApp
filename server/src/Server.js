@@ -23,18 +23,18 @@ const CLIENT_BUILD_PATH = path.join(__dirname, "./../../client/build");
 // adding middleware to define static files location
 app.use("/", express.static(CLIENT_BUILD_PATH));
 
+// --------------------------------------------------------------------------------> GET
 app.get("/get", async (request, response) => {
     // construct a MongoClient object, passing in additional options
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
-
+    
     try {
         await mongoClient.connect();
         // get reference to database via name
         let db = mongoClient.db(DB_NAME);
         let techArray = await db.collection("technologies").find().sort("name",1).toArray();
-        // let coursesArray = await db.collection("courses").find().sort("code",1).toArray();
-        // let json = { "technologies": techArray, "courses":coursesArray };
-        let json = { "technologies": techArray };
+        let coursesArray = await db.collection("courses").find().sort("code",1).toArray();
+        let json = { "technologies": techArray, "courses":coursesArray };
         // serializes sampleJSON to string format
         response.status(200);
         response.send(json);
@@ -47,6 +47,7 @@ app.get("/get", async (request, response) => {
     }
 });
 
+// --------------------------------------------------------------------------------> POST
 app.post("/post", async (request, response) => {
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
     // Use connect method to connect to the server
@@ -54,7 +55,7 @@ app.post("/post", async (request, response) => {
         await mongoClient.connect(); 
         // get reference to desired collection in DB
         let techCollection = mongoClient.db(DB_NAME).collection("technologies");
-
+        
         // sanitize form input
         request.body.name = request.sanitize(request.body.name);
         request.body.description = request.sanitize(request.body.description);
@@ -63,10 +64,10 @@ app.post("/post", async (request, response) => {
             course.code = request.sanitize(course.code);
             course.name = request.sanitize(course.name);
         });
-
+        
         // add new document into DB collection
         let result = await mongoClient.db(DB_NAME).collection("technologies").insertOne(request.body);
-
+        
         // status code for created
         response.status(200);
         response.send(result);
@@ -80,18 +81,11 @@ app.post("/post", async (request, response) => {
     }
 });
 
-
-app.put("/put/:id", async (request, response) => {
+app.post("/post/technology", async (request, response) => {
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
     // Use connect method to connect to the server
     try {
         await mongoClient.connect(); 
-        // get reference to desired collection in DB
-        let techCollection = mongoClient.db(DB_NAME).collection("technologies");
-
-        // isolating route parameter
-        let id = new ObjectId(request.sanitize(request.params.id));
-
         // sanitize form input
         request.body.name = request.sanitize(request.body.name);
         request.body.description = request.sanitize(request.body.description);
@@ -100,22 +94,11 @@ app.put("/put/:id", async (request, response) => {
             course.code = request.sanitize(course.code);
             course.name = request.sanitize(course.name);
         });
-
         // add new document into DB collection
-        let selector = { "_id": id };
-        let newValues = { $set: {"name": request.body.name, "description": request.body.description, "difficulty": request.body.difficulty, "courses": request.body.courses } };
-        let result = await techCollection.updateOne(selector, newValues);
-
-        if (result.matchedCount <= 0) {
-            response.status(404);
-            response.send({error: "No technology documents found with ID"});
-            mongoClient.close();
-            return;
-        }
-        
+        let result = await mongoClient.db(DB_NAME).collection("technologies").insertOne(request.body);
+        // status code for created
         response.status(200);
         response.send(result);
-        
     } catch (error) {
         response.status(500);
         response.send({error: error.message});
@@ -125,7 +108,98 @@ app.put("/put/:id", async (request, response) => {
     }
 });
 
-app.delete("/delete/:id", async (request, response) => {
+app.post("/post/course", async (request, response) => {
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    // Use connect method to connect to the server
+    try {
+        await mongoClient.connect(); 
+        // sanitize form input
+        request.body.code = request.sanitize(request.body.code);
+        request.body.name = request.sanitize(request.body.name);
+        let result = await mongoClient.db(DB_NAME).collection("courses").insertOne(request.body);
+        // status code for created
+        response.status(200);
+        response.send(result);
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
+    } finally {
+        mongoClient.close();
+    }
+});
+
+// --------------------------------------------------------------------------------> UPDATE
+app.put("/edit/tech/:id", async (request, response) => {
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    try {
+        await mongoClient.connect(); 
+        // get reference to desired collection in DB
+        let techCollection = mongoClient.db(DB_NAME).collection("technologies");
+
+        // sanitize form input
+        // isolating route parameter
+        let id = new ObjectId(request.sanitize(request.params.id));
+        request.body.name = request.sanitize(request.body.name);
+        request.body.description = request.sanitize(request.body.description);
+        request.body.difficulty = request.sanitize(request.body.difficulty);
+        request.body.courses.forEach(course => {
+            course.code = request.sanitize(course.code);
+            course.name = request.sanitize(course.name);
+        });
+        let selector = { "_id": id };
+        let newValues = { $set: {"name": request.body.name, "description": request.body.description, "difficulty": request.body.difficulty, "courses": request.body.courses } };
+        let result = await techCollection.updateOne(selector, newValues);
+        if (result.matchedCount <= 0) {
+            response.status(404);
+            response.send({error: "No technology documents found with ID"});
+            mongoClient.close();
+            return;
+        }
+        response.status(200);
+        response.send(result);
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
+    } finally {
+        mongoClient.close();
+    }
+});
+
+app.put("/put/edit/course", async (request, response) => {
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    try {
+        await mongoClient.connect(); 
+        // get reference to desired collection in DB
+        let techCollection = mongoClient.db(DB_NAME).collection("technologies");
+
+        // sanitize form input
+        // isolating route parameter
+        let id = new ObjectId(request.sanitize(request.params.id));
+        request.body.name = request.sanitize(request.body.name);
+        let selector = { "_id": id };
+        let newValues = { $set: {"name": request.body.name, } };
+        let result = await techCollection.updateOne(selector, newValues);
+        if (result.matchedCount <= 0) {
+            response.status(404);
+            response.send({error: "No technology documents found with ID"});
+            mongoClient.close();
+            return;
+        }
+        response.status(200);
+        response.send(result);
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
+    } finally {
+        mongoClient.close();
+    }
+});
+
+// --------------------------------------------------------------------------------> DELETE
+app.delete("/delete/technology", async (request, response) => {
     // construct MongoClient object for working with MongoDB
     let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
     // Use connect method to connect to the server
@@ -135,7 +209,6 @@ app.delete("/delete/:id", async (request, response) => {
         let techCollection = mongoClient.db(DB_NAME).collection("technologies");
         // isolate route parameter
         let id = new ObjectId(request.sanitize(request.params.id));
-        
         let selector = { "_id": id };
         let result = await techCollection.deleteOne(selector); 
         // status code for created
@@ -154,7 +227,34 @@ app.delete("/delete/:id", async (request, response) => {
         mongoClient.close();
     }
 });
-    
+
+app.delete("/delete/course", async (request, response) => {
+    // construct MongoClient object for working with MongoDB
+    let mongoClient = new MongoClient(URL, { useUnifiedTopology: true });
+    // Use connect method to connect to the server
+    try {
+        await mongoClient.connect();
+        // isolate route parameter
+        let id = new ObjectId(request.sanitize(request.params.id));
+        let selector = { "_id": id };
+        let result = await mongoClient.db(DB_NAME).collection("courses").deleteOne(selector); 
+        // status code for created
+        if (result.deletedCount <= 0) {
+            response.status(404);
+            response.send({error: 'No technology documents found with ID'});
+            return;
+        }
+        response.status(200);
+        response.send(result);
+    } catch (error) {
+        response.status(500);
+        response.send({error: error.message});
+        throw error;
+    } finally {
+        mongoClient.close();
+    }
+});
+
 // wildcard to handle all other non-api URL routings and point to index.html
 app.use((request, response) => {
     response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));

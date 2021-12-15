@@ -30,6 +30,7 @@ function App() {
 
   React.useEffect(() => {
     // getting json from api
+    setLoading(true);
     getJSONData(RETRIEVE_SCRIPT, onResponse, onError);
   } , []);
 
@@ -70,7 +71,7 @@ function App() {
 
         <div className="error">There are currently no technologies and courses in the database :(</div>}
         <div className="footer">Web App powered by 
-          <span className="footer__stack">MERN Stack</span>
+          <span className="footer__stack"> MERN Stack</span>
         </div>
     </div>
   );

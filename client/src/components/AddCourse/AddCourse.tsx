@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import "./AddCourse.scss";
 import { ComponentProps } from "../../Tools/data.model";
@@ -21,7 +21,7 @@ const AddCourse = ({ setLoading }: ComponentProps) => {
             "code": code,
             "name": courseName
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "create");
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, 1);
     }
     
     const onError= () => {
@@ -29,8 +29,9 @@ const AddCourse = ({ setLoading }: ComponentProps) => {
         console.log("Error occured while adding the course");
     }
 
+    const navigate = useNavigate();
     const onSuccess = () => {
-        <Link to="/"></Link>
+        navigate("/");
     }
 
     const getcourseName = (e:any) => {
@@ -48,9 +49,9 @@ const AddCourse = ({ setLoading }: ComponentProps) => {
                 <div className="content__caption">Add New Course:</div>
 
                 <div>
-                    <p className="paragraph">Course Code:</p>
+                    <p className="content__content">Course Code:</p>
                     <input type="text" maxLength={50} value={code} onChange={getCode} className="form-control-lg" />
-                    <p className="paragraph">Name:</p>
+                    <p className="content__content">Name:</p>
                     <input type="text" maxLength={50} value={courseName} onChange={getcourseName} className="form-control-lg" />
                 </div>
 

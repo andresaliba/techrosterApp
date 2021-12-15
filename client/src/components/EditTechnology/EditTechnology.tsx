@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import './EditTechnology.scss';
 import { ComponentProps, Technology, Course} from "../../Tools/data.model";
@@ -8,7 +8,7 @@ import { ComponentProps, Technology, Course} from "../../Tools/data.model";
 const EditTechnology = ({ technologies, courses, setLoading }: ComponentProps) => {
 
     // --------------------------------------------- state setup
-    const SUBMIT_SCRIPT:string = "http://localhost:8080/post/edit/tech";
+    const SUBMIT_SCRIPT:string = "http://localhost:8080/edit/tech";
 
     // isolate the id route parameter
     let { id } = useParams();
@@ -29,11 +29,14 @@ const EditTechnology = ({ technologies, courses, setLoading }: ComponentProps) =
             "difficulty": techDifficulty,
             "courses": courseArray
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "update");
+        console.log("Inside EditTech()");
+        
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, 2);
     }
 
+    const navigate = useNavigate();
     const onSuccess = () => {
-        <Link to="/"></Link>
+        navigate("/");
     }
 
     const onError = () => {
@@ -92,19 +95,19 @@ const EditTechnology = ({ technologies, courses, setLoading }: ComponentProps) =
                 <div className="content__caption">Edit Technology:</div>
 
                 <div>
-                    <p className="paragraph">Name:</p>
+                    <p className="content__content">Name:</p>
                     <input type="text" id="formControlDefault" maxLength={50} defaultValue={currentTechnology.name} onChange={getTechName} className="form-control-lg" />
-                    <p className="paragraph">Description:</p>
+                    <p className="content__content">Description:</p>
                     <textarea className="form-control" id="textAreaExample" maxLength={500} defaultValue={currentTechnology.description} onChange={getTechDescription} style={{width:450, height:150}}></textarea>
                 </div>
 
-                <p className="paragraph">Difficulty</p>
+                <p className="content__content">Difficulty</p>
 
                 <select className="btn__style" value={techDifficulty} onChange={getTechDifficulty}>
                     {dropdown()}
                 </select>
 
-                <div className="paragraph">
+                <div className="content__content">
                     {(courses.length > 0) ?
                         <p>Used in courses</p>
                     :

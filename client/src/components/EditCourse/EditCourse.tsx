@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { sendJSONData } from "../../Tools/Toolkit";
 import "./EditCourse.scss";
 import { ComponentProps, Course } from "../../Tools/data.model";
@@ -23,16 +23,17 @@ const EditCourse = ({courses, setLoading }: ComponentProps) => {
             "_id": course?._id,
             "name": courseName
         };
-        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, "update");
+        sendJSONData(SUBMIT_SCRIPT, JSON.stringify(json), onSuccess, onError, 2);
     }
-    
+
+    const navigate = useNavigate();
+    const onSuccess = () => {
+        navigate("/");
+    }
+
     const onError= () => {
         setLoading(false);
         console.log("Error occured while editting the Course");
-    }
-
-    const onSuccess = () => {
-        <Link to="/"></Link>
     }
 
     const getcourseName = (e:any) => {
@@ -48,9 +49,9 @@ const EditCourse = ({courses, setLoading }: ComponentProps) => {
                 <div className="content__caption">Edit Course:</div>
 
                 <div>
-                    <p className="paragraph">Course Code:</p>
+                    <p className="content__content">Course Code:</p>
                     <input type="text" id="formControlDefault" readOnly = {true} placeholder={course.code} className="form-control-lg" />
-                    <p className="paragraph">Name:</p>
+                    <p className="content__content">Name:</p>
                     <input type="text" id="formControlDefault" maxLength={50} defaultValue={course.name} onChange={getcourseName} className="form-control-lg" />
                 </div>
 
