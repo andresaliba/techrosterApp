@@ -11,6 +11,7 @@ import DeleteTechnology from './components/DeleteTechnology/DeleteTechnology';
 import EditTechnology from './components/EditTechnology/EditTechnology';
 import AddCourse from './components/AddCourse/AddCourse';
 import EditCourse from './components/EditCourse/EditCourse';
+import DeleteCourse from './components/DeleteCourse/DeleteCourse';
 
 const RETRIEVE_SCRIPT:string = "http://localhost:8080/get";
 
@@ -62,35 +63,14 @@ function App() {
               <Route  path="technology/delete/:id" element={<DeleteTechnology technologies={technologies} courses={courses} setLoading={setLoading} /> } />
               <Route  path="course/add" element={<AddCourse technologies={technologies} courses={courses} setLoading={setLoading} /> } />
               <Route  path="course/edit/:id" element={<EditCourse technologies={technologies} courses={courses} setLoading={setLoading} /> } />
+              <Route  path="course/delete/:id" element={<DeleteCourse technologies={technologies} courses={courses} setLoading={setLoading} /> } />
             </Route>
-
-            {/* <Route path="/list"
-              element={ <List technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              />
-            <Route path="/tech/delete/:id"
-              element={ <DeleteTech technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              />
-            <Route path="/tech/add"
-              element={ <AddTech technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              />
-            <Route path="/course/delete/:id"
-              element={ <DeleteCourse technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              />
-            <Route path="/course/add"
-              element={ <AddCourse technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              />
-            <Route path="/course/edit/:id"
-              element={ <EditCourse technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              />
-            <Route path="/tech/edit/:id"
-              element={ <EditTech technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
-              /> */}
         </Routes>
       :
-        <div className="error">There are currently no technologies and courses in the database :(</div>}
 
+        <div className="error">There are currently no technologies and courses in the database :(</div>}
         <div className="footer">Web App powered by 
-        <span className="footer__stack">MERN Stack</span>
+          <span className="footer__stack">MERN Stack</span>
         </div>
     </div>
   );

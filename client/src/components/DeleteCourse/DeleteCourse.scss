@@ -1,23 +1,14 @@
 @import "../../globals";
 
+// @import "~bootstrap/scss/bootstrap";
 .buttons__bottom {
     padding-top: 15px;
+    // color:$accent_color;
 }
 
 .paragraph {
-    padding-top: 15px;
     font-size:18px;
     color:#616161;
-}
-
-.form-control-lg {
-    border-radius: 8px;
-    border: none;
-    height: 50px;
-    font-size: 18px;
-    padding-left: 20px;
-    background-color: #e6e6e6;
-
 }
 
 .btn__style {
@@ -43,15 +34,4 @@
     text-align: center;
     display: inline-block;
     font-size: 16px;
-}
-
-textarea {
-    border-radius: 8px;
-    border: none;
-    height: 50px;
-    font-size: 18px;
-    padding-top: 20px;
-    padding-left: 20px;
-    background-color: #e6e6e6;
-
 }
