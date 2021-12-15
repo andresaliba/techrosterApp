@@ -7,6 +7,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 
 const Roster = ({ technologies, courses }: ComponentProps) => {
+    // ----------------------------------------------  render to the DOM
     return(
         <div className="row">
             <div>

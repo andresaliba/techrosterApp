@@ -50,10 +50,7 @@ function App() {
       {(technologies.length > 0 && courses.length > 0) ?
           <Routes>
             <Route  path="/" element = { <Roster technologies={technologies} courses={courses} setLoading={setLoading} /> } />
-
-            // <Route>
-            //   <Error/>
-            // </Route>
+            <Route  path="" element = { <Error /> } />
 
             {/* <Route path="/list"
               element={ <List technologies={technologies} courses={courses} fetchData={fetchData} setLoading={setLoading}/> }
